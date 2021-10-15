@@ -1,16 +1,28 @@
 <?php
 
-class RegisterController {
+class RegisterController extends Controller {
 
     public function index() {
-        require_once VIEW_PATH."register.php";
+
+
+
+        $data['name'] = 'MVC Project';
+        $data['state'] = 'Register';
+
+        $this->render('register', $data);
     }
 
     public function createUser  ($params) {
+
        $user = new Users();
-       $insert = $user->insert();
-       if($insert) {
-        header('location: '.SR.'login');
+       $userId = $user->insert();
+
+       if($userId) {
+            $_SESSION['name'] = $user->name;
+            $_SESSION['id'] = $userId;
+
+            $this->redirect('users/updateAddress');
+            
        } else {
            dnd('Failed to register');
        }

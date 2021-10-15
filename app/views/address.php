@@ -13,27 +13,28 @@
             <div class="mx-auto  my-auto col-md-5 col-sm-6">
                 <div class="card mt-5">
                     <div class="card-body">
-                        <h2 class="text-center"><?=$name?></h2>
+                        <h2 class="text-center">MVC Project</h2>
                         <hr>
-                        <h4 class="mt-3 mb-4"><strong><?=$state?></strong></h4>  
+                        <h4 class="mt-3 mb-4"><strong>Welcome <?=$name?></strong></h4>  
+                        <h5 class="mt-3 mb-4">Update Your address</h5>  
                         <div>
-                            <form action="<?=SR."register/createUser"?>" method="post">
+                            <form action="<?=SR."users/storeAddress"?>" method="post">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="name">Full name</label>
-                                            <input class="form-control" name="name">
+                                            <label for="name">Address</label>
+                                            <input class="form-control" name="street">
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Email address</label>
-                                            <input class="form-control" name="email_address">
+                                            <label for="name">City</label>
+                                            <input class="form-control" name="city">
                                         </div>
                                         <div class="form-group">
-                                            <label for="name">Password</label>
-                                            <input class="form-control" name="password">
+                                            <label for="name">State</label>
+                                            <input class="form-control" name="state">
                                         </div>
                                         <div class="form-group">
-                                            <input class="btn btn-primary btn-block" type="submit" value="Register">
+                                            <input class="btn btn-primary btn-block" type="submit" value="Update Address">
                                         </div>
                                         
                                         <p>Have an account? <a href="<?=SR."login"?>">Login</a></p>
