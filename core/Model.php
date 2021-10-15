@@ -3,6 +3,7 @@
 abstract class Model {
     private $data;
     public $db;
+    public $selects;
 
     public function __construct($model) {
         $table = $model;
@@ -22,5 +23,16 @@ abstract class Model {
     public function insert() {
         return $this->db->insert($this->data);
     }
+
+    public function select($where = null, $order = null, $limit = null, $startFrom = null)
+    {
+        return $this->db->select($this->selects, $where, $order, $limit, $startFrom, false);
+    }
+
+    public function selectAll($selects = null, $where = null, $order = null, $limit = null, $startFrom = null)
+    {
+        return $this->db->select($this->selects, $where, $order, $limit, $startFrom);
+    }
+
 
 }

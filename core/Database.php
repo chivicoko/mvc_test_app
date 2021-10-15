@@ -11,7 +11,28 @@ class Database {
 
     private static function dbInstance()
     { 
-        return self::$db ?: new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);   
+        if(self::$db == null) {
+            $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            return $pdo;
+        }
+        
+        return self::$db;   
+    }
+
+    public function select($selects, $where, $order, $limit, $startFrom, $all = true)
+    {
+        $sql = 'SELECT ';
+        $sql .= $selects != null ? " $selects " : ' * ';
+        $sql .= "FROM {$this->table} ";
+        $sql .= $where != null ? " WHERE $where " : '';
+        $sql .= $order != null ? "ORDER BY $order" : '';
+        if($limit != null) {
+            $sql .= $startFrom != null ? " LIMIT $startFrom, $limit " : " LIMIT $limit ";
+        }
+        
+        $query = $this->executeSql($sql);
+        return $all ? $query->fetchAll() : $query->fetch();
     }
 
     public function insert(array $data = []) {
@@ -49,6 +70,8 @@ class Database {
     {
         return self::$db->query($sql);
     }
+
+
 }
 
 
