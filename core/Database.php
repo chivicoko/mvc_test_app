@@ -10,17 +10,16 @@ class Database {
     }
 
     private static function dbInstance()
-    {
-        
+    { 
         return self::$db ?: new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);   
     }
 
     public function insert(array $data = []) {
-        $keys = array_keys($data);
-        $keys = implode(', ', $keys);
+        $keyArray = array_keys($data);
+        $keys = implode(', ', $keyArray);
 
-        $values = array_values($data);
-        $values = "'".implode("', '", $values)."'";
+        $valueArray = array_values($data);
+        $values = "'".implode("', '", $valueArray)."'";
 
         $sql = "INSERT INTO $this->table ({$keys}) VALUES($values)";
 
@@ -32,7 +31,6 @@ class Database {
         $params = $this->updateParams($data);
 
         $sql = "UPDATE {$this->table} SET {$params} WHERE {$where}";
-        dnd($params, $sql);
         $query = $this->executeSql($sql);
 
         return $query ? true : false;
@@ -46,8 +44,11 @@ class Database {
         }
         return rtrim($params, ', ');
     }
+
     private function executeSql($sql)
     {
         return self::$db->query($sql);
     }
 }
+
+

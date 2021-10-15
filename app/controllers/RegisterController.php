@@ -3,13 +3,19 @@
 class RegisterController extends Controller {
 
     public function index() {
-
-
-
         $data['name'] = 'MVC Project';
         $data['state'] = 'Register';
 
         $this->render('register', $data);
+    }
+
+    public function login()
+    {
+        $sent = array(
+            'loginUser' =>  $_POST['name']
+        );
+
+        $this->render('login', $sent);
     }
 
     public function createUser  ($params) {

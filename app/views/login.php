@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h2 class="text-center">MVC Project</h2>
                         <hr>
-                        <h4 class="mt-3 mb-4"><strong>Login</strong></h4>  
+                        <h4 class="mt-3 mb-4"><strong><big><?=$loginUser?>!!!</big></strong></h4>  
                         <div>
                             <form>
                                 <div class="row">

@@ -12,3 +12,5 @@ class View {
         require_once VIEW_PATH . "$page.php";
     }
 }
+
+
